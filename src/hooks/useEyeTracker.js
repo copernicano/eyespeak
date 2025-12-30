@@ -80,10 +80,10 @@ export function useEyeTracker() {
         const lm = results.faceLandmarks[0];
         setLandmarks(lm);
         
-        // Calcola posizione sguardo
+        // Calcola posizione sguardo (X invertita per camera selfie specchiata)
         const irisPos = getIrisPosition(lm);
         if (irisPos) {
-          const smoothed = smoothGaze(irisPos.x, irisPos.y, 0.3);
+          const smoothed = smoothGaze(1 - irisPos.x, irisPos.y, 0.5);
           setGazePosition(smoothed);
         }
         

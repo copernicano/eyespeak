@@ -83,16 +83,28 @@
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         user-select: none;
+        box-sizing: border-box;
       }
-      
-      html, body, #root {
+
+      html {
         height: 100%;
-        overflow: hidden;
+        height: 100dvh;
       }
-      
+
       body {
+        height: 100%;
+        height: 100dvh;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
         background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
         font-family: 'Atkinson Hyperlegible', sans-serif;
+      }
+
+      #root {
+        height: 100%;
+        height: 100dvh;
+        overflow: hidden;
       }
 
       /* Radial glow effect for dwell progress */
@@ -104,7 +116,7 @@
         transition: opacity 0.15s ease-out;
         pointer-events: none;
       }
-      
+
       .dwell-glow.active {
         opacity: 1;
       }
@@ -132,6 +144,21 @@
       * {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+      }
+
+      /* Landscape mode adjustments */
+      @media (orientation: landscape) and (max-height: 500px) {
+        /* Compact everything in landscape on short screens */
+        .landscape-compact {
+          padding: 4px !important;
+          gap: 4px !important;
+        }
+      }
+
+      /* Pulse animation for speaking indicator */
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
       }
     </style>
   </head>

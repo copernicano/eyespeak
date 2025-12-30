@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
 const DEFAULT_SETTINGS = {
-  dwellTime: 600,
+  dwellTime: 1200,
   speakLetters: true,
   speakWords: true,
-  smoothing: 0.3
+  smoothing: 0.5,
+  showGazeIndicator: true
 };
 
 export function Settings({ isOpen, onClose, onSettingsChange }) {
@@ -44,12 +45,12 @@ export function Settings({ isOpen, onClose, onSettingsChange }) {
             <label className="text-white text-xl block mb-4 font-medium">
               Tempo selezione: <span style={{color:"#f59e0b"}}>{settings.dwellTime}ms</span>
             </label>
-            <input type="range" min="400" max="1200" step="100" value={settings.dwellTime}
+            <input type="range" min="800" max="2000" step="100" value={settings.dwellTime}
               onChange={(e) => updateSetting("dwellTime", Number(e.target.value))}
               className="w-full h-3 rounded-full appearance-none cursor-pointer"
               style={{background:"linear-gradient(90deg, #f59e0b 0%, #334155 100%)"}} />
             <div className="flex justify-between text-sm text-white/40 mt-2">
-              <span>Veloce (400ms)</span><span>Lento (1200ms)</span>
+              <span>Veloce (800ms)</span><span>Lento (2000ms)</span>
             </div>
           </div>
 
@@ -70,6 +71,16 @@ export function Settings({ isOpen, onClose, onSettingsChange }) {
               style={{background: settings.speakWords ? "#22c55e" : "rgba(71,85,105,0.5)"}}>
               <div className="w-7 h-7 bg-white rounded-full absolute top-1 transition-all duration-200"
                 style={{left: settings.speakWords ? "calc(100% - 32px)" : "4px"}} />
+            </button>
+          </div>
+
+          <div className="flex items-center justify-between py-4" style={{borderTop:"1px solid rgba(71,85,105,0.3)"}}>
+            <label className="text-white text-xl font-medium">Mostra indicatore sguardo</label>
+            <button onClick={() => updateSetting("showGazeIndicator", !settings.showGazeIndicator)}
+              className="w-16 h-9 rounded-full transition-all duration-200 relative"
+              style={{background: settings.showGazeIndicator ? "#22c55e" : "rgba(71,85,105,0.5)"}}>
+              <div className="w-7 h-7 bg-white rounded-full absolute top-1 transition-all duration-200"
+                style={{left: settings.showGazeIndicator ? "calc(100% - 32px)" : "4px"}} />
             </button>
           </div>
         </div>
