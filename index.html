@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁️</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>EyeSpeak</title>
+
+    <!-- Fonts: Atkinson Hyperlegible (designed for low vision) + DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // Deep, calming base palette
+              base: {
+                950: '#020617',
+                900: '#0f172a',
+                800: '#1e293b',
+                700: '#334155',
+                600: '#475569',
+              },
+              // Warm accent for primary actions
+              warm: {
+                400: '#fbbf24',
+                500: '#f59e0b',
+                600: '#d97706',
+              },
+              // Soft teal for secondary
+              teal: {
+                400: '#2dd4bf',
+                500: '#14b8a6',
+                600: '#0d9488',
+              },
+              // Zone colors (for spatial memory)
+              zone: {
+                0: '#f59e0b', // Amber
+                1: '#14b8a6', // Teal
+                2: '#a78bfa', // Purple
+                3: '#34d399', // Emerald
+              }
+            },
+            fontFamily: {
+              display: ['DM Sans', 'sans-serif'],
+              body: ['Atkinson Hyperlegible', 'sans-serif'],
+            },
+            animation: {
+              'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+              'breathe': 'breathe 3s ease-in-out infinite',
+              'fade-in': 'fade-in 0.3s ease-out',
+            },
+            keyframes: {
+              'glow-pulse': {
+                '0%, 100%': { opacity: '0.4' },
+                '50%': { opacity: '0.8' },
+              },
+              'breathe': {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.02)' },
+              },
+              'fade-in': {
+                '0%': { opacity: '0', transform: 'translateY(8px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      
+      html, body, #root {
+        height: 100%;
+        overflow: hidden;
+      }
+      
+      body {
+        background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+        font-family: 'Atkinson Hyperlegible', sans-serif;
+      }
+
+      /* Radial glow effect for dwell progress */
+      .dwell-glow {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        opacity: 0;
+        transition: opacity 0.15s ease-out;
+        pointer-events: none;
+      }
+      
+      .dwell-glow.active {
+        opacity: 1;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.2);
+        border-radius: 2px;
+      }
+
+      /* Focus states for accessibility */
+      button:focus-visible, [tabindex]:focus-visible {
+        outline: 3px solid #fbbf24;
+        outline-offset: 2px;
+      }
+
+      /* Smooth text rendering */
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
